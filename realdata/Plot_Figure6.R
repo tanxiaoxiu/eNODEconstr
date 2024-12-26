@@ -9,7 +9,9 @@ library(tidyr)
 
 
 ############Figure6
-base_path1 <- "~/eNODEconstr/realdata/Fiber/results/trajectory"
+N <- 20
+M <- 6
+base_path <- "~/eNODEconstr/realdata/Fiber/results/trajectory"
 true_path <- "~/eNODEconstr/realdata/Fiber/data"
 setwd(true_path)
 abundance_data <- read.table("filter_fiber_SCFA.txt",header = T,sep="\t")
@@ -20,7 +22,6 @@ microbe_name$Regulate <- paste0("Microbe",rep(1:N))
 #Figure6a
 path <- paste0(base_path, "/Rs")
 setwd(path)
-#####Prediction
 Score <- read.table("score_normalized_pre_subject_l2.txt",header = T,sep="\t")
 Score <- Score %>%
   left_join(microbe_name, by = c("Regulate" = "Regulate")) %>%

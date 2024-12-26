@@ -2,7 +2,6 @@ library(dplyr)
 library(reshape2)
 library(ggplot2)
 
-
 ##########FigureS6
 #FigureS6a
 setwd("~/eNODEconstr/realdata/Synthetic/results/trajectory")
@@ -28,9 +27,7 @@ p1 <- ggplot(gama_df, aes(x = gama, y = value, group = 1)) +
     panel.grid.minor = element_blank(),  
     panel.background = element_rect(fill = "white", color = "grey80", size = 0.5))+
     scale_y_continuous(breaks = seq(0.080, max(gama_df$value, na.rm = TRUE), by = 0.01))
-
 ggsave(filename="FigureS6a.png", plot=p1, device="png", dpi=600, units="in", width=8, height=5)
-
 
 #FigureS6b
 df_data <- read.table("~/eNODEconstr/realdata/Synthetic/data/Synthetic_subject_species.txt",header = T,sep="\t")
@@ -54,7 +51,7 @@ ggsave(filename="FigureS6b.png",plot=plot_microbe,device="png",dpi=600,units="in
 #FigureS6c
 N <- 25
 M <- 4
-base_path1 <- "~/eNODEcostr/realdata/Synthetic/results/score/"
+base_path <- "~/eNODEcostr/realdata/Synthetic/results/score/"
 true_path <- "/~/eNODEcostr/realdata/Synthetic/data"
 setwd(true_path)
 abundance_data <- read.table("Synthetic_subject_species.txt",header = T,sep="\t")
@@ -62,8 +59,7 @@ microbe_name <- as.data.frame(colnames(abundance_data)[4:(N+3)])
 colnames(microbe_name) <- "Microbe_name"
 microbe_name$Regulate <- paste0("Microbe",rep(1:N))
 
-
-setwd(base_path1) 
+setwd(base_path) 
 Score <- read.table("score_normalized_pre_subject_l2.txt",header = T,sep="\t")
 Score <- Score %>%
   left_join(microbe_name, by = c("Regulate" = "Regulate")) %>%
@@ -72,7 +68,6 @@ Score <- Score %>%
 
 microbe_data  <- subset(Score, Group == "Microbe")
 metabolite_data  <- subset(Score, Group == "Metabolite")
-
 result_df <- data.frame(Subject = character(), SpearmanCorrelation = numeric(), stringsAsFactors = FALSE)
 subjects <- unique(microbe_data$Subject)
 

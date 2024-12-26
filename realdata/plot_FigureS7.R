@@ -27,20 +27,15 @@ p1 <- ggplot(gama_long, aes(x = gama, y = value, group = Group, color = Group)) 
     panel.background = element_rect(fill = "white", color = "grey80", size = 0.5),
     legend.text = element_text(size = 20),  
     legend.title = element_text(size = 22))
-
 ggsave(filename="FigureS7a.png",plot=p1,device="png",dpi=600,units="in",width=10,height=5)
 
-
 #FigureS7b
-###########mean
 setwd("~/eNODEconstr/realdata/Fiber/results/trajectory")
 all_rrmse_mean <- readRDS("all_rrmse_mean.rds")
 all_rrmse_mean$Method <- factor(all_rrmse_mean$Method, levels = c("NODE", "eNODE","eNODEconstr"))
-
 all_rrmse_mean$mean_rrmse <- as.numeric(as.character(all_rrmse_mean$mean_rrmse))
 all_rrmse_mean$Group <- factor(all_rrmse_mean$Group, levels = c("Control", "Rs", "In"))
 all_rrmse_mean$Method <- factor(all_rrmse_mean$Method, levels = c("NODE", "eNODE","eNODEconstr"))
-
 g <- ggplot(all_rrmse_mean, aes(x=Group, y=mean_rrmse, fill=Method))
 p2 <- g + geom_col(position = position_dodge()) +
   scale_fill_manual(values = c("#3F918B","#896191","#df7676")) +
@@ -55,6 +50,5 @@ p2 <- g + geom_col(position = position_dodge()) +
         panel.grid.minor = element_blank()) +
   theme(legend.spacing.y = unit(0.5, 'cm')) + 
   guides(fill = guide_legend(byrow = TRUE))
-
 ggsave(filename="FigureS7b.png",plot=p2,device="png",dpi=600,units="in",width=14,height=8)
 

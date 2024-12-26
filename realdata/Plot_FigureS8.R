@@ -7,9 +7,8 @@ library(igraph)
 library(reticulate)
 library(tidyr)
 
-
 ############FigureS8
-base_path1 <- "~/eNODEconstr/realdata/Fiber/results/trajectory"
+base_path <- "~/eNODEconstr/realdata/Fiber/results/trajectory"
 true_path <- "~/eNODEconstr/realdata/Fiber/data"
 setwd(true_path)
 abundance_data <- read.table("filter_fiber_SCFA.txt",header = T,sep="\t")

@@ -1,11 +1,7 @@
 library(tidyverse)
 library(ggplot2)
 
-#Figure5
-
-N <- 25
-M <- 4
-
+####Figure5
 setwd("~/eNODEconstr/realdata/Synthetic/results/trajectory")
 
 #Figure5a
@@ -42,15 +38,17 @@ ggsave(filename="Figure5a.png",plot=plot_rrmse_mean,device="png",dpi=600,units="
 
 
 #Figure5b
-base_path1 <- "~/eNODEcostr/realdata/Synthetic/results/score/"
-true_path <- "/~/eNODEcostr/realdata/Synthetic/data"
+N <- 25
+M <- 4
+base_path <- "~/eNODEcostr/realdata/Synthetic/results/score/"
+true_path <- "~/eNODEcostr/realdata/Synthetic/data"
 setwd(true_path)
 abundance_data <- read.table("Synthetic_subject_species.txt",header = T,sep="\t")
 microbe_name <- as.data.frame(colnames(abundance_data)[4:(N+3)])
 colnames(microbe_name) <- "Microbe_name"
 microbe_name$Regulate <- paste0("Microbe",rep(1:N))
 
-setwd(base_path1) 
+setwd(base_path) 
 Score <- read.table("score_normalized_pre_subject_l2.txt",header = T,sep="\t")
 Score <- Score %>%
   left_join(microbe_name, by = c("Regulate" = "Regulate")) %>%
