@@ -53,17 +53,18 @@ plot_score_r_rmse_subject <- ggplot(all_score_r_rmse_subject, aes(x = Timepoint,
   theme_minimal() +
   theme(
     strip.background = element_rect(fill = "lightgrey"),
-    strip.text = element_text(size = 35,color = "black"),
-    axis.title.x = element_text(size = 33,color = "black"), 
-    axis.title.y = element_text(size = 33,color = "black"),
+    strip.text = element_text(size = 34,color = "black"),
+    axis.title.x = element_text(size = 33,color = "black", margin = margin(t = 19)), 
+    axis.title.y = element_text(size = 33,color = "black", margin = margin(r = 18)), 
     axis.text.x = element_text(size = 30,color = "black"),  
     axis.text.y = element_text(size = 30,color = "black"),
     panel.grid.major = element_line(color = "grey90"),
     panel.grid.minor = element_blank(),  
     panel.background = element_rect(fill = "white", color = "grey80", size = 0.5),
     legend.position = "bottom",  
-    legend.title = element_text(size = 34),
-    legend.text = element_text(size = 34) 
+    legend.title = element_text(size = 33, margin = margin(r = 20)), 
+    legend.text = element_text(size = 32, margin = margin(r = 10)),  
+    legend.key.size = unit(1, "cm")
   )
 
 ggsave(filename="Figure3.png",plot=plot_score_r_rmse_subject,device="png",dpi=600,units="in",width=30,height=15)

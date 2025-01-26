@@ -36,17 +36,18 @@ plot_traj_r_rmse_subject <- ggplot(all_traj_r_rmse_subject, aes(x = Timepoint, y
   theme_minimal() +
   theme(
     strip.background = element_rect(fill = "lightgrey"),
-    strip.text = element_text(size = 35,color = "black"),
-    axis.title.x = element_text(size = 33,color = "black"), 
-    axis.title.y = element_text(size = 33,color = "black"),
+    strip.text = element_text(size = 34,color = "black"),
+    axis.title.x = element_text(size = 33,color = "black", margin = margin(t = 19)), 
+    axis.title.y = element_text(size = 33,color = "black", margin = margin(r = 18)), 
     axis.text.x = element_text(size = 30,color = "black"),  
     axis.text.y = element_text(size = 30,color = "black"),
     panel.grid.major = element_line(color = "grey90"),
     panel.grid.minor = element_blank(),  
     panel.background = element_rect(fill = "white", color = "grey80", size = 0.5),
     legend.position = "bottom",  
-    legend.title = element_text(size = 34),  
-    legend.text = element_text(size = 34)  
+    legend.title = element_text(size = 33, margin = margin(r = 20)), 
+    legend.text = element_text(size = 32, margin = margin(r = 10)),  
+    legend.key.size = unit(1, "cm")  
   )
 
 ggsave(filename="FigureS4a.png",plot=plot_traj_r_rmse_subject,device="png",dpi=600,units="in",width=18,height=15)
@@ -78,17 +79,18 @@ plot_score_r_rmse_subject <- ggplot(all_score_r_rmse_subject, aes(x = Timepoint,
   theme_minimal() +
   theme(
     strip.background = element_rect(fill = "lightgrey"),
-    strip.text = element_text(size = 35,color = "black"),
-    axis.title.x = element_text(size = 33,color = "black"), 
-    axis.title.y = element_text(size = 33,color = "black"),
+    strip.text = element_text(size = 34,color = "black"),
+    axis.title.x = element_text(size = 33,color = "black", margin = margin(t = 19)), 
+    axis.title.y = element_text(size = 33,color = "black", margin = margin(r = 18)), 
     axis.text.x = element_text(size = 30,color = "black"),  
     axis.text.y = element_text(size = 30,color = "black"),
     panel.grid.major = element_line(color = "grey90"),
     panel.grid.minor = element_blank(),  
     panel.background = element_rect(fill = "white", color = "grey80", size = 0.5),
     legend.position = "bottom",  
-    legend.title = element_text(size = 34),
-    legend.text = element_text(size = 34) 
+    legend.title = element_text(size = 33, margin = margin(r = 20)), 
+    legend.text = element_text(size = 32, margin = margin(r = 10)),  
+    legend.key.size = unit(1, "cm")
   )
 
 ggsave(filename="FigureS4b.png",plot=plot_score_r_rmse_subject,device="png",dpi=600,units="in",width=18,height=15)
@@ -106,7 +108,7 @@ for (subj in subject_values) {
       select(index, value, Method) %>%
       pivot_wider(names_from = index, values_from = value)
     
-    plot <- ggradar(
+    .plot <- ggradar(
       dat_wide,
       background.circle.transparency = 0, 
       background.circle.colour = "white", 
@@ -121,31 +123,28 @@ for (subj in subject_values) {
       axis.label.offset = 1.15 
     )+
       ggtitle(bquote(italic(S)~"="~.(subj)))+
-      
+      labs(color = "Method") +  
       theme(
-        legend.position = "none", 
-        plot.title = element_text(hjust = 0.5, size = 28)
-        
+        plot.title = element_text(hjust = 0.5, size = 28),
+        legend.title = element_text(size = 14), 
+        legend.text = element_text(size = 12),               
+        legend.position = "bottom"                        
       )
     
-    plot_list[[paste("Subject", subj, "Timepoint", time)]] <- plot
+    plot_list[[paste("Subject", subj, "Timepoint", time)]] <- .plot
   }
 }
 
-combined_plot <- wrap_plots(plot_list, ncol = 4, nrow = 1) &
-  theme(legend.position = "bottom",
-        legend.text = element_text(size = 26)
-  ) 
-
-
-combined_plot_with_legend <- combined_plot +
-  plot_layout(guides = "collect")&
+combined_plot <- wrap_plots(plot_list, ncol = 4, nrow = 1, guides = "collect") &
   theme(
-    plot.margin = unit(c(0.2, -0.5, 0.2, -0.5), "cm") 
+    legend.position = "bottom",             
+    legend.text = element_text(size = 29),  
+    legend.key.size = unit(4, "cm"),      
+    legend.title = element_text(size = 30),
+    plot.margin = unit(c(0.2, -0.5, 0.2, -0.5), "cm")
   )
 
-ggsave(filename="FigureS4c.png",plot=combined_plot_with_legend,device="png",dpi=600,units="in",width=24,height=6)
-
+ggsave(filename="FigureS4c.png",plot=combined_plot,device="png",dpi=600,units="in",width=24,height=6)
 
 
 
