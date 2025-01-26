@@ -48,7 +48,7 @@ subject_labels <- c(
 plot_traj_r_rmse_subject <- ggplot(all_traj_r_rmse_subject, aes(x = Timepoint, y = r_rmse, fill = Method)) +
   geom_boxplot() +
   facet_grid(Group ~ SubjectN, labeller = labeller(SubjectN = as_labeller(subject_labels, label_parsed))) +
-  scale_fill_manual(values = c("#13679e","#f09b81","#df7676")) +
+  scale_fill_manual(values = c("#3F918B","#896191","#df7676")) +
   labs(x = expression(italic(T)), y = "Relative RMSE", fill = "Method") +
   theme_minimal() +
   theme(

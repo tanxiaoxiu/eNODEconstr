@@ -34,7 +34,7 @@ subject_labels <- c(
 plot_traj_r_rmse_subject <- ggplot(all_traj_r_rmse_subject, aes(x = Timepoint, y = r_rmse, fill = Method)) +
   geom_boxplot() +
   facet_grid(Group ~ SubjectN, labeller = labeller(SubjectN = as_labeller(subject_labels, label_parsed))) +
-  scale_fill_manual(values = c("#13679e","#f09b81","#df7676")) +
+  scale_fill_manual(values = c("#3F918B","#896191","#df7676")) +
   labs(x = expression(italic(T)), y = "Relative RMSE", fill = "Method") +
   theme_minimal() +
   theme(
@@ -75,7 +75,7 @@ subject_labels <- c(
 plot_score_r_rmse_subject <- ggplot(all_score_r_rmse_subject, aes(x = Timepoint, y = r_rmse, fill = Method)) +
   geom_boxplot() +
   facet_grid(Group ~ SubjectN, labeller = labeller(SubjectN = as_labeller(subject_labels, label_parsed))) +
-  scale_fill_manual(values = c("#13679e","#f09b81","#df7676")) +
+  scale_fill_manual(values = c("#3F918B","#896191","#df7676")) +
   labs(x = expression(italic(T)), y = "Relative RMSE", fill = "Method") +
   theme_minimal() +
   theme(
@@ -110,7 +110,7 @@ for (subj in subject_values) {
       dat_wide,
       background.circle.transparency = 0, 
       background.circle.colour = "white", 
-      group.colours = c("#f09b81","#df7676"), 
+      group.colours = c("#896191","#df7676"), 
       grid.min = 0,   
       grid.mid = 0.5,  
       grid.max = 1.0, 
